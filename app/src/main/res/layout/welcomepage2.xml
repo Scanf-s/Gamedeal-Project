@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquareroundeb"
-        android:text="매일 갱신되는\nPC 및 Console 게임\n할인정보"
+        android:text="선호 게임 장르\n설정을 통한\n할인 게임 추천"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -61,7 +61,7 @@
         android:id="@+id/welcomeProgressStateButton1"
         android:layout_width="85dp"
         android:layout_height="15dp"
-        android:background="@drawable/welcomeprogress"
+        android:background="@drawable/welcomeprogress2"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline3" />
 
@@ -70,7 +70,7 @@
         android:layout_width="85dp"
         android:layout_height="15dp"
         android:layout_marginStart="48dp"
-        android:background="@drawable/welcomeprogress2"
+        android:background="@drawable/welcomeprogress"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/welcomeProgressStateButton1" />
 
