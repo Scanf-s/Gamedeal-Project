@@ -7,6 +7,44 @@
     android:background="@drawable/welcomepage_background"
     android:orientation="vertical">
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/welcomeviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_rightarrow"
+        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView1"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_rightarrow"
+        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_rightarrow"
+        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_rightarrow"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
@@ -36,17 +74,19 @@
         app:layout_constraintGuide_end="30dp" />
 
     <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareroundeb"
+        android:fontFamily="@font/nanumsqarerountr"
         android:text="옆으로 슬라이드"
         android:textColor="@color/white"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/GGamdeal"
+        android:id="@+id/welcomepagetextcontents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nanumsquareroundeb"
@@ -54,34 +94,24 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <android.widget.Button
-        android:id="@+id/welcomeProgressStateButton1"
-        android:layout_width="85dp"
-        android:layout_height="15dp"
-        android:background="@drawable/welcomeprogress"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3" />
-
-    <android.widget.Button
-        android:id="@+id/welcomeProgressStateButton2"
-        android:layout_width="85dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="48dp"
-        android:background="@drawable/welcomeprogress2"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/welcomeProgressStateButton1" />
-
-    <android.widget.Button
-        android:id="@+id/welcomeProgressStateButton3"
-        android:layout_width="85dp"
-        android:layout_height="15dp"
-        android:background="@drawable/welcomeprogress2"
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        app:dotsColor="#F1F1F1"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="16dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/welcomeProgressStateButton2" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:progressMode="true"
+        app:selectedDotColor="#FFC107" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

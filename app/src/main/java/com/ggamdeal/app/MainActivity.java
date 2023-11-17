@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils;
 import androidx.appcompat.app.AppCompatActivity;
 import com.ggamdeal.app.R;
 import com.ggamdeal.app.databinding.ActivityMainBinding;
+import com.ggamdeal.app.databinding.WelcomepageBinding;
 
 public class MainActivity extends AppCompatActivity {
 
