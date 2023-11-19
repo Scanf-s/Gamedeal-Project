@@ -18,26 +18,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Check if it's the first run
+
+        //최초실행했는지 파악하기 위한 코드
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         boolean isInit = sharedPreferences.getBoolean("isInit", false);
 
         if (!isInit) {
-            // Set the flag to true indicating the app has been initialized
+            //어플리케이션이 최초로 실행되는지 확인하는 flag에 따라 WelcomePage를 보여줌
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("isInit", true);
             editor.apply();
 
-            // Start WelcomeActivity and finish MainActivity
+            // WelcomeActivity 실행, LoginActivity 종료 (현재는 MainActivity가 LoginActivity)
             Intent welcomeIntent = new Intent(this, WelcomeActivity.class);
             startActivity(welcomeIntent);
             finish();
         } else {
-            // It's not the first run, continue with the normal flow
+            //최초실행 아니면 loginpage로 넘어감
             setContentView(R.layout.loginpage);
-            // Your existing code for MainActivity goes here
         }
 
+        //Welcomepage로 돌아가기 위해 비밀번호 변경 버튼을 따로 설정해줌 (이후 삭제 예정)
         TextView button = findViewById(R.id.findPasswordTextButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
