@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "238173516649",
+    "project_id": "ggamdeal-5f8cb",
+    "storage_bucket": "ggamdeal-5f8cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238173516649:android:8ab3fe7ffab755a35a03f8",
+        "android_client_info": {
+          "package_name": "com.ggamdeal.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsS1iLsRzWLxxYFdKlLHYF3ObopNgpc00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
