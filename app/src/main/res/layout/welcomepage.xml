@@ -52,7 +52,7 @@
         android:fontFamily="@font/nanumsquareroundeb"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:text="최초실행은 이미 해서\n비밀번호 찾기 누르면\nWelcomePage로\n이동합니다."
+        android:text="@string/welcome_string_1"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/nextImageButton"
         app:layout_constraintStart_toStartOf="@+id/guideline3"

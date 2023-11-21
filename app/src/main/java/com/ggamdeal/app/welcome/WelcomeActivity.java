@@ -24,12 +24,9 @@ public class WelcomeActivity extends AppCompatActivity {
         nextImageButton = findViewById(R.id.nextImageButton);
         welcomePageTextContents = findViewById(R.id.welcomepagetextcontents);
 
-        nextImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //클릭하면 다음 text를 보여주어야 함
-                changeTextForNextPage();
-            }
+        nextImageButton.setOnClickListener(view -> {
+            //클릭하면 다음 text를 보여주어야 함
+            changeTextForNextPage();
         });
     }
     private void changeTextForNextPage() {
@@ -54,7 +51,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void navigateToNextActivity() {
         //loginActivty 실행
-        //2023-11-19 기준 MainActivity가 loginpage를 표시하도록 설정해두었음
         Intent loginIntent = new Intent(this, MainActivity.class);
         startActivity(loginIntent);
     }

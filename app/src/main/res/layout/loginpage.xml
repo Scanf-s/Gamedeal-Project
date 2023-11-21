@@ -64,7 +64,8 @@
         android:layout_width="296dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="이메일을 입력하세요"
+        android:background="@drawable/white_edittext"
+        android:hint="이메일을 입력하세요"
         android:textSize="15sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -74,12 +75,27 @@
         android:id="@+id/passwordInputField"
         android:layout_width="296dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="비밀번호를 입력하세요"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/white_edittext"
+        android:hint="비밀번호를 입력하세요"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="@+id/emailInputField"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/emailInputField"
         app:layout_constraintTop_toBottomOf="@+id/emailInputField" />
+
+    <TextView
+        android:id="@+id/emailErrorMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="#FF0000"
+        android:textSize="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/emailInputField"
+        tools:text="테스트 " />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
@@ -89,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/passwordInputField"
         app:layout_constraintTop_toBottomOf="@+id/passwordInputField"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <TextView
         android:id="@+id/textView4"
@@ -118,7 +134,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
+        android:id="@+id/emailLoginButton"
         android:layout_width="296dp"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"
@@ -131,15 +147,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/emailSignUpButton"
         android:layout_width="296dp"
         android:layout_height="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/loginbutton"
         android:text="이메일로 회원가입"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
+        app:layout_constraintEnd_toEndOf="@+id/emailLoginButton"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/appCompatButton"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
+        app:layout_constraintStart_toStartOf="@+id/emailLoginButton"
+        app:layout_constraintTop_toBottomOf="@+id/emailLoginButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
