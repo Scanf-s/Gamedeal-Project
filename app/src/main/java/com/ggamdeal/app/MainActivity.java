@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.ggamdeal.app.login.LoginActivity;
 import com.ggamdeal.app.welcome.WelcomeActivity;
 
-
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

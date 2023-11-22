@@ -96,12 +96,13 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // Sign Up success, update UI with the signed-in user's information
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+
                         updateUI(user);
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // If sign Up fails, display a message to the user.
                         //Log.w(TAG, "createUserWithEmail:failure", task.getException());
                         Log.d(TAG, "createUserWithEmail:failure");
                         Toast.makeText(getApplicationContext(), "Authentication failed.",
@@ -110,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
     private void emailLogin(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
