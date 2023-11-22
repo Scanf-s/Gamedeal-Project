@@ -1,6 +1,7 @@
 package com.ggamdeal.app.welcome;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,48 +11,64 @@ import android.widget.TextView;
 
 import com.ggamdeal.app.MainActivity;
 import com.ggamdeal.app.R;
+import com.ggamdeal.app.login.LoginActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WelcomeActivity extends AppCompatActivity {
 
+    private ViewPager2 viewPager;
+    private WelcomePagerAdapter adapter;
     private ImageView nextImageButton;
-    private TextView welcomePageTextContents;
     private int currentPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcomepage);
 
+        viewPager = findViewById(R.id.viewPager);
         nextImageButton = findViewById(R.id.nextImageButton);
-        welcomePageTextContents = findViewById(R.id.welcomepagetextcontents);
 
-        nextImageButton.setOnClickListener(view -> {
-            //클릭하면 다음 text를 보여주어야 함
-            changeTextForNextPage();
+        List<String> pageTexts = new ArrayList<>();
+        pageTexts.add(getString(R.string.welcome_string_1));
+        pageTexts.add(getString(R.string.welcome_string_2));
+        pageTexts.add(getString(R.string.welcome_string_3));
+
+        adapter = new WelcomePagerAdapter(pageTexts);
+        viewPager.setAdapter(adapter);
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                currentPage = position;
+
+                // Update visibility of nextImageButton
+                if (currentPage < pageTexts.size() - 1) {
+                    nextImageButton.setVisibility(View.INVISIBLE);
+                } else {
+                    nextImageButton.setVisibility(View.VISIBLE);
+                }
+            }
         });
-    }
-    private void changeTextForNextPage() {
-        String[] PAGE_TEXTS = {
-                "",
-                (String) getResources().getText(R.string.welcome_string_2),
-                (String) getResources().getText(R.string.welcome_string_3)
-        };
 
-        // 페이지 개수 만큼 수행
-        if (currentPage < PAGE_TEXTS.length) {
-            //현재 페이지의 TextView의 text를 변경해줌
-            welcomePageTextContents.setText(PAGE_TEXTS[currentPage]);
-
-            //페이지 증가
-            currentPage++;
-        } else {
-            // 더이상 welcomepage가 없을 경우, 다음 Activity 실행
-            navigateToNextActivity();
-        }
+        nextImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewPager.getCurrentItem() < pageTexts.size() - 1) {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                } else {
+                    navigateToNextActivity();
+                }
+            }
+        });
     }
 
     private void navigateToNextActivity() {
-        //loginActivty 실행
-        Intent loginIntent = new Intent(this, MainActivity.class);
+        // Start the MainActivity
+        Intent loginIntent = new Intent(this, LoginActivity.class);
         startActivity(loginIntent);
+        finish(); // Optional: Finish the WelcomeActivity so the user can't go back to it.
     }
 }
