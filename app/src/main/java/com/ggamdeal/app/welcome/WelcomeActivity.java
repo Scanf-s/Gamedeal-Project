@@ -7,20 +7,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.ggamdeal.app.MainActivity;
 import com.ggamdeal.app.R;
 import com.ggamdeal.app.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private WelcomePagerAdapter adapter;
     private ImageView nextImageButton;
+    CircleIndicator3 indicator;
     private int currentPage = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         viewPager = findViewById(R.id.viewPager);
         nextImageButton = findViewById(R.id.nextImageButton);
+        indicator = findViewById(R.id.welcomePageIndicator);
 
         List<String> pageTexts = new ArrayList<>();
         pageTexts.add(getString(R.string.welcome_string_1));
@@ -37,6 +39,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         adapter = new WelcomePagerAdapter(pageTexts);
         viewPager.setAdapter(adapter);
+        indicator.setViewPager(viewPager);
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

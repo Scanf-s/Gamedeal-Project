@@ -1,0 +1,30 @@
+<!-- recyclerview_item.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/homeCenterImageView"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:src="@drawable/image1"/>
+
+    <TextView
+        android:id="@+id/homeCenterTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="none"
+        android:maxLines="1"
+        android:text="DB로부터 게임 이미지, 제목 가져와야함"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/homeCenterDiscountRateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123% 할인"
+        android:textSize="12dp"/>
+
+</LinearLayout>

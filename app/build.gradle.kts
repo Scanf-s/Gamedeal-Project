@@ -52,4 +52,7 @@ dependencies {
 
     // Also add the dependency for the Google Play services library and specify its version
     implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    // ViewPager2 Indicator
+    implementation ("me.relex:circleindicator:2.1.6")
 }

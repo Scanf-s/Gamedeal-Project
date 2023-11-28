@@ -6,44 +6,48 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ggamdeal.app.R;
 
-public class ImagePagerAdapter extends PagerAdapter {
+public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder> {
 
     private Context mContext;
-    private int[] mImages = {R.drawable.image1, R.drawable.image2, R.drawable.image3};
+    private int[] mImages = {
+            R.drawable.image1,
+            R.drawable.image2,
+            R.drawable.image3
+    };
 
     public ImagePagerAdapter(Context context) {
         mContext = context;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View itemView = inflater.inflate(R.layout.item_image, container, false);
-
-        ImageView imageView = itemView.findViewById(R.id.topImageView);
-        imageView.setImageResource(mImages[position]);
-
-        container.addView(itemView);
-
-        return itemView;
+    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_image, parent, false);
+        return new ImageViewHolder(itemView);
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View) object);
+    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+        holder.imageView.setImageResource(mImages[position]);
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return mImages.length;
     }
 
-    @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view == object;
+    public static class ImageViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+
+        public ImageViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.topImageView);
+        }
     }
 }
