@@ -42,6 +42,10 @@ dependencies {
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
 
+    // Declare the dependency for the Cloud Firestore library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-firestore")
+    
     // TODO: Add the dependencies for Firebase products you want to use
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation("com.google.firebase:firebase-analytics")
@@ -55,4 +59,7 @@ dependencies {
 
     // ViewPager2 Indicator
     implementation ("me.relex:circleindicator:2.1.6")
+
+    // ImageUrl downloader
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }

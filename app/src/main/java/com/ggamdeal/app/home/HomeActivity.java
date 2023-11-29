@@ -1,20 +1,16 @@
 package com.ggamdeal.app.home;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.ggamdeal.app.R;
-import com.ggamdeal.app.login.LoginComplete;
 import com.google.firebase.auth.FirebaseAuth;
+
+import com.ggamdeal.app.R;
 
 import me.relex.circleindicator.CircleIndicator3;
 
