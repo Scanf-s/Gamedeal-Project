@@ -70,18 +70,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/homeTopImgViewPager"
-            android:layout_width="350dp"
-            android:layout_height="250dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/communityButton" />
-
         <TextView
-            android:id="@+id/textBelowImageView"
+            android:id="@+id/homeTopTextTitle"
             android:layout_width="120dp"
             android:layout_height="35dp"
             android:fontFamily="@font/nanumsquareroundeb"
@@ -91,19 +81,30 @@
             android:text="특가 상품"
             android:textColor="@color/black"
             android:textSize="25dp"
-            app:layout_constraintStart_toStartOf="@+id/homeTopImgViewPager"
-            app:layout_constraintTop_toBottomOf="@+id/homeTopImgViewPager" />
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/homeTopTextView" />
 
         <TextView
-            android:id="@+id/textBelowImageViewSecondary"
+            android:id="@+id/homeTopTextTitleSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsqarerountr"
             android:text="연말 연시 할인 행사를 즐겨보세요"
             android:textColor="@color/black"
             android:textSize="15dp"
-            app:layout_constraintStart_toStartOf="@+id/textBelowImageView"
-            app:layout_constraintTop_toBottomOf="@+id/textBelowImageView" />
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/homeTopTextTitle" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/homeTopImgViewPager"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/homeTopTextTitleSecondary" />
 
         <me.relex.circleindicator.CircleIndicator3
             android:id="@+id/homeTopImgPageIndicator"
@@ -111,10 +112,8 @@
             android:layout_height="wrap_content"
             app:ci_drawable="@color/black"
             app:ci_drawable_unselected="@color/gray"
-            app:layout_constraintBottom_toTopOf="@+id/textBelowImageViewSecondary"
             app:layout_constraintEnd_toEndOf="@+id/homeTopImgViewPager"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/textBelowImageView"
             app:layout_constraintTop_toBottomOf="@+id/homeTopImgViewPager"
             app:layout_constraintVertical_bias="0.2" />
 
