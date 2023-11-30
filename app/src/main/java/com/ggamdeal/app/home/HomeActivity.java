@@ -1,6 +1,7 @@
 package com.ggamdeal.app.home;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
@@ -17,8 +18,8 @@ import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ViewPager2 viewPager;
-    private ImagePagerAdapter adapter;
+    private ViewPager2 homeTopViewPager;
+    private homeTopElementPagerAdapter adapter;
     CircleIndicator3 indicator;
     private static final String TAG = "EmailPassword";
     ImageView communityImgButton;
@@ -29,13 +30,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.homepage);
 
         // ViewPager 설정
-        viewPager = findViewById(R.id.homeTopImgViewPager);
-        adapter = new ImagePagerAdapter(this);
-        viewPager.setAdapter(adapter);
+        homeTopViewPager = findViewById(R.id.homeTopViewPager);
+        adapter = new homeTopElementPagerAdapter(this);
+        homeTopViewPager.setAdapter(adapter);
 
-        // Instantiate the CircleIndicator
-        indicator = findViewById(R.id.homeTopImgPageIndicator);
-        indicator.setViewPager(viewPager);
+        // CircleIndicator 설정
+        indicator = findViewById(R.id.homeTopElementPageIndicator);
+        indicator.setViewPager(homeTopViewPager);
 
         communityImgButton = findViewById(R.id.communityButton);
         communityImgButton.setOnClickListener(new View.OnClickListener() {

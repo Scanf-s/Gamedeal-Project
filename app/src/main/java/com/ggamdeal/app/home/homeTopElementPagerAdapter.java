@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,57 +22,57 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder> {
+public class homeTopElementPagerAdapter extends RecyclerView.Adapter<homeTopElementPagerAdapter.ViewHolder> {
 
     private static final String TAG = "EmailPassword";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Context mContext;
 
-    private List<String> mImageUrls = new ArrayList<>(); // 이미지 URL을 담을 리스트
+    private List<GameInfo> gameInfoList = new ArrayList<>();
 
-    private int[] mImages = {
-            R.drawable.image1,
-            R.drawable.image2,
-            R.drawable.image3
-    };
-
-    public ImagePagerAdapter(Context context) {
-
+    public homeTopElementPagerAdapter(Context context) {
         mContext = context;
         getDataFromFirestore();
     }
 
     @NonNull
     @Override
-    public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_image, parent, false);
-        return new ImageViewHolder(itemView);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        GameInfo gameInfo = gameInfoList.get(position);
+
         Glide.with(mContext)
-                .load(mImageUrls.get(position))
+                .load(gameInfo.getImgUrl())
                 .into(holder.imageView);
+
+        holder.titleView.setText(gameInfo.getTitle());
+        holder.discountRateView.setText(gameInfo.getDiscountRate());
     }
 
     @Override
     public int getItemCount() {
-        return mImageUrls.size();
+        return gameInfoList.size();
     }
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-
-        public ImageViewHolder(@NonNull View itemView) {
+        TextView titleView;
+        TextView discountRateView;
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.topImageView);
+            titleView = itemView.findViewById(R.id.topImageTitle);
+            discountRateView = itemView.findViewById(R.id.topImageDiscountRate);
         }
     }
 
     private void getDataFromFirestore() {
-        // 'steam' 컬렉션에서 데이터 가져오기
         db.collection("steam")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -81,7 +82,10 @@ public class ImagePagerAdapter extends RecyclerView.Adapter<ImagePagerAdapter.Im
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 // 'img' 필드에서 이미지 URL 가져오기
                                 String imageUrl = document.getString("img");
-                                mImageUrls.add(imageUrl);
+                                String titleInfo = document.getString("title");
+                                String discountRateInfo = document.getString("discount_pct");
+                                GameInfo gameInfo = new GameInfo(imageUrl, titleInfo, discountRateInfo + " 할인 중");
+                                gameInfoList.add(gameInfo);
                             }
                             notifyDataSetChanged(); // 데이터가 변경되었음을 어댑터에 알림
                         } else {

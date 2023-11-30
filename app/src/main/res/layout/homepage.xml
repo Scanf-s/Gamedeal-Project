@@ -72,8 +72,8 @@
 
         <TextView
             android:id="@+id/homeTopTextTitle"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/nanumsquareroundeb"
             android:shadowColor="#A9A9A9"
             android:shadowDy="7.0"
@@ -97,25 +97,64 @@
             app:layout_constraintTop_toBottomOf="@+id/homeTopTextTitle" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/homeTopImgViewPager"
+            android:id="@+id/homeTopViewPager"
             android:layout_width="350dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/homeTopTextTitleSecondary" />
 
         <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/homeTopImgPageIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/homeTopElementPageIndicator"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
             app:ci_drawable="@color/black"
             app:ci_drawable_unselected="@color/gray"
-            app:layout_constraintEnd_toEndOf="@+id/homeTopImgViewPager"
+            app:layout_constraintEnd_toEndOf="@+id/guideline4"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintTop_toBottomOf="@+id/homeTopImgViewPager"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintTop_toBottomOf="@+id/homeTopViewPager"
+            app:layout_constraintVertical_bias="0" />
+
+
+        <TextView
+            android:id="@+id/homeMiddleTextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:shadowColor="#A9A9A9"
+            android:shadowDy="7.0"
+            android:shadowRadius="2.0"
+            android:text="Steam 할인 상품"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/homeTopElementPageIndicator" />
+
+        <TextView
+            android:id="@+id/homeMiddleTextTitleSecondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumsqarerountr"
+            android:text="더보기"
+            android:textColor="@color/gray"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/homeMiddleTextTitle"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/homeMiddleViewPager1"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:layout_constraintEnd_toStartOf="@+id/guideline4"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/homeMiddleTextTitle" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

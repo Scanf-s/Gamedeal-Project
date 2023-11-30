@@ -47,7 +47,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 super.onPageSelected(position);
                 currentPage = position;
 
-                // Update visibility of nextImageButton
                 if (currentPage < pageTexts.size() - 1) {
                     nextImageButton.setVisibility(View.INVISIBLE);
                 } else {
@@ -56,22 +55,18 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
-        nextImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (viewPager.getCurrentItem() < pageTexts.size() - 1) {
-                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
-                } else {
-                    navigateToNextActivity();
-                }
+        nextImageButton.setOnClickListener(view -> {
+            if (viewPager.getCurrentItem() < pageTexts.size() - 1) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+            } else {
+                navigateToNextActivity();
             }
         });
     }
 
     private void navigateToNextActivity() {
-        // Start the MainActivity
         Intent loginIntent = new Intent(this, LoginActivity.class);
         startActivity(loginIntent);
-        finish(); // Optional: Finish the WelcomeActivity so the user can't go back to it.
+        finish();
     }
 }
