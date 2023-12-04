@@ -50,12 +50,9 @@ public class HomeActivity extends AppCompatActivity {
         indicator.setViewPager(homeTopViewPager);
 
         communityImgButton = findViewById(R.id.communityButton);
-        communityImgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-                finish();
-            }
+        communityImgButton.setOnClickListener(view -> {
+            signOut();
+            finish();
         });
 
         drawerLayout = findViewById(R.id.drawerLayout);
