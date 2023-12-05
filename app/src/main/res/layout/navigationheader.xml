@@ -12,7 +12,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        app:srcCompat="@drawable/userimage" />
 
     <TextView
         android:id="@+id/username"
@@ -22,13 +22,5 @@
         android:layout_marginTop="10dp"
         android:text ="NULL"
         android:textSize="20sp"/>
-
-    <TextView
-        android:id="@+id/userinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="20, 남자"
-        android:textSize="14sp"/>
 
 </LinearLayout>

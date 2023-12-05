@@ -65,4 +65,8 @@ dependencies {
     // Material design
     implementation ("com.google.android.material:material:1.10.0")
 
+    // Card View
+    implementation ("androidx.cardview:cardview:1.0.0")
+
+
 }

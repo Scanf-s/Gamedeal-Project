@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="20dp"
+    card_view:cardBackgroundColor="#f7f2f3"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="3dp"
+    card_view:contentPadding="4dp">
+
+    <RelativeLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/card_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:scaleType="centerCrop" />
+
+
+        <TextView
+            android:id="@+id/card_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/card_image"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/card_image"
+            android:ellipsize="none"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:text="TitleView"
+            android:textSize="32sp" />
+
+        <TextView
+            android:id="@+id/card_original_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/card_discount_price"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/card_image"
+            android:fontFamily="@font/nanumsquareroundb"
+            android:text="OriginalPrice" />
+
+        <TextView
+            android:id="@+id/card_discount_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/card_discount_rate"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toEndOf="@+id/card_image"
+            android:fontFamily="@font/nanumsquareroundb"
+            android:text="DiscountPrice" />
+
+        <TextView
+            android:id="@+id/card_discount_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/card_image"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="2dp"
+            android:layout_toEndOf="@+id/card_image"
+            android:fontFamily="@font/nanumsquareroundb"
+            android:text="DiscountRate 할인" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

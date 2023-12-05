@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,10 +30,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ViewPager2 homeTopViewPager;
-    private homeTopElementPagerAdapter adapter;
-    CircleIndicator3 indicator;
     private static final String TAG = "EmailPassword";
+    private ViewPager2 homeTopViewPager;
+    private RecyclerView homeMiddleRecyclerView;
+    private TopElementAdapter adapter;
+    private MiddleElementAdapter adapter2;
+    TextView showMore1;
+    CircleIndicator3 indicator;
     ImageView communityImgButton;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
@@ -42,8 +49,12 @@ public class HomeActivity extends AppCompatActivity {
 
         // ViewPager 설정
         homeTopViewPager = findViewById(R.id.homeTopViewPager);
-        adapter = new homeTopElementPagerAdapter(this);
+        adapter = new TopElementAdapter(this);
         homeTopViewPager.setAdapter(adapter);
+
+        homeMiddleRecyclerView = findViewById(R.id.homeMiddleRecyclerView);
+        adapter2 = new MiddleElementAdapter(this);
+        homeMiddleRecyclerView.setAdapter(adapter2);
 
         // CircleIndicator 설정
         indicator = findViewById(R.id.homeTopElementPageIndicator);
@@ -78,6 +89,21 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
+        //더보기 버튼 설정
+        showMore1 = findViewById(R.id.homeMiddleTextTitleSecondary);
+        showMore1.setOnClickListener(v -> {
+            if(homeMiddleRecyclerView.getVisibility() == View.GONE) {
+                homeMiddleRecyclerView.setVisibility(View.VISIBLE);
+                fadeInRecyclerView();
+                showMore1.setText("닫기");
+            }
+            else if((homeMiddleRecyclerView.getVisibility() == View.VISIBLE) && showMore1.getText().equals("닫기")){
+                homeMiddleRecyclerView.setVisibility(View.GONE);
+                fadeOutRecyclerView();
+                showMore1.setText("더보기");
+            }
+        });
+
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Log.d("USERINFO", "현재 로그인 된 유저의 정보를 가져옵니다.");
         if (currentUser != null) {
@@ -86,6 +112,29 @@ public class HomeActivity extends AppCompatActivity {
             TextView userName = headerView.findViewById(R.id.username);
             userName.setText(userEmail);
         }
+    }
+
+    // RecyclerView를 페이드 인 시키는 애니메이션
+    private void fadeInRecyclerView() {
+        homeMiddleRecyclerView.setAlpha(0f);
+        homeMiddleRecyclerView.setVisibility(View.VISIBLE);
+        homeMiddleRecyclerView.animate()
+                .alpha(1f)
+                .setDuration(500)
+                .setListener(null);
+    }
+
+    // RecyclerView를 페이드 아웃 시키는 애니메이션
+    private void fadeOutRecyclerView() {
+        homeMiddleRecyclerView.animate()
+                .alpha(0f)
+                .setDuration(500)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        homeMiddleRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
+                    }
+                });
     }
 
     @Override
