@@ -1,45 +1,31 @@
 package com.ggamdeal.app.home;
 
 public class GameInfo {
-    private String imgUrl; //img
-    private String title; //title
-    private String link; //element link
-    private String discountPrice; //discount_price
-    private String originalPrice; //origianl_price
-    private String discountRate; //discount_pct
+    private String imageUrl;
+    private String originalPrice;
+    private String gameLink;
+    private String discountPrice;
+    private String title;
+    private String discountRate;
 
     public GameInfo() {
     }
 
-    public GameInfo(String imgUrl, String title, String link, String discountPrice, String originalPrice, String discountRate) {
-        this.imgUrl = imgUrl;
-        this.title = title;
-        this.link = link;
-        this.discountPrice = discountPrice;
+    public GameInfo(String imageUrl, String originalPrice, String gameLink, String discountPrice, String title, String discountRate) {
+        this.imageUrl = imageUrl;
         this.originalPrice = originalPrice;
-        this.discountRate = discountRate;
-    }
-
-    public GameInfo(String imgUrl, String title, String discountRate) {
-        this.imgUrl = imgUrl;
+        this.gameLink = gameLink;
+        this.discountPrice = discountPrice;
         this.title = title;
         this.discountRate = discountRate;
     }
 
-    public String getLink() {
-        return link;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(String discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getOriginalPrice() {
@@ -50,12 +36,20 @@ public class GameInfo {
         this.originalPrice = originalPrice;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getGameLink() {
+        return gameLink;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setGameLink(String gameLink) {
+        this.gameLink = gameLink;
+    }
+
+    public String getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(String discountPrice) {
+        this.discountPrice = discountPrice;
     }
 
     public String getTitle() {

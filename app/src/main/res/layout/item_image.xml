@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,24 +8,35 @@
 
     <ImageView
         android:id="@+id/topImageView"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/topImageTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ellipsize="none"
-        android:fontFamily="@font/nanumsquareroundb"
+        android:fontFamily="@font/currentregular"
         android:maxLines="1"
-        android:textSize="18dp" />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/topImageView"
+        app:layout_constraintTop_toBottomOf="@+id/topImageView" />
 
     <TextView
         android:id="@+id/topImageDiscountRate"
-        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/nanumsquareroundb"
-        android:textSize="12dp" />
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/topImageView"
+        app:layout_constraintTop_toBottomOf="@+id/topImageTitle" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

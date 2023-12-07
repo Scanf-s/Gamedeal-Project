@@ -22,24 +22,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.ViewHolder> {
+public class HorrorElementAdapter extends RecyclerView.Adapter<HorrorElementAdapter.ViewHolder> {
 
-    private static final String TAG = "FirebaseInfo";
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private String TAG = "FirebaseInfo";
+    private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
     private Context mContext;
-    private List<GameInfo> gameInfoList = new ArrayList<>();
+    protected List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public TopElementAdapter(Context context) {
+    public HorrorElementAdapter(Context context) {
         mContext = context;
-        getActionDataFromFirestore();
+        getHorrorDataFromFirestore();
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HorrorElementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_image, parent, false);
-        return new ViewHolder(itemView);
+                .inflate(R.layout.homepage_middlecardview, parent, false);
+        return new HorrorElementAdapter.ViewHolder(itemView);
     }
 
     @Override
@@ -50,8 +50,10 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
                 .load(gameInfo.getImageUrl())
                 .into(holder.imageView);
 
-        holder.titleView.setText(gameInfo.getTitle());
+        holder.titleTextView.setText(gameInfo.getTitle());
         holder.discountRateView.setText(gameInfo.getDiscountRate());
+        holder.originalPriceView.setText(gameInfo.getOriginalPrice());
+        holder.discountPriceView.setText(gameInfo.getDiscountPrice());
         holder.setGameUrl(gameInfo.getGameLink());
     }
 
@@ -61,15 +63,21 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private String gameUrl;
         ImageView imageView;
-        TextView titleView;
+        TextView titleTextView;
         TextView discountRateView;
+        TextView originalPriceView;
+        TextView discountPriceView;
+
+        private String gameUrl;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.topImageView);
-            titleView = itemView.findViewById(R.id.topImageTitle);
-            discountRateView = itemView.findViewById(R.id.topImageDiscountRate);
+            imageView = itemView.findViewById(R.id.card_image);
+            titleTextView = itemView.findViewById(R.id.card_title);
+            originalPriceView = itemView.findViewById(R.id.card_original_price);
+            discountPriceView = itemView.findViewById(R.id.card_discount_price);
+            discountRateView = itemView.findViewById(R.id.card_discount_rate);
             itemView.setOnClickListener(this);
         }
 
@@ -86,10 +94,11 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
         }
     }
 
-    private void getActionDataFromFirestore() {
-        CollectionReference colref = db.collection("Game").document("Steam").collection("Action");
+
+    private void getHorrorDataFromFirestore() {
+        CollectionReference colref = db.collection("Game").document("Steam").collection("Horror");
         colref.get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String discountPrice = document.getString("discountPrice");

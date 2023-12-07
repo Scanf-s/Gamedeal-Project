@@ -16,12 +16,6 @@
             android:name=".home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".login.EmailAuthActivity"
-            android:exported="false" />
-        <activity
-            android:name=".login.LoginComplete"
-            android:exported="false" />
-        <activity
             android:name=".login.LoginActivity"
             android:exported="false" />
         <activity

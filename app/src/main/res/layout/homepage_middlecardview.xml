@@ -7,7 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:padding="20dp"
-    card_view:cardBackgroundColor="#f7f2f3"
+    android:clickable="true"
+    card_view:cardBackgroundColor="#393c3e"
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="3dp"
     card_view:contentPadding="4dp">
@@ -23,7 +24,7 @@
             android:layout_height="100dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:scaleType="centerCrop" />
+            android:scaleType="center" />
 
 
         <TextView
@@ -36,8 +37,10 @@
             android:layout_toEndOf="@+id/card_image"
             android:ellipsize="none"
             android:fontFamily="@font/nanumsquareroundeb"
+            android:maxLines="2"
             android:text="TitleView"
-            android:textSize="32sp" />
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/card_original_price"
@@ -47,7 +50,8 @@
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/card_image"
             android:fontFamily="@font/nanumsquareroundb"
-            android:text="OriginalPrice" />
+            android:text="OriginalPrice"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/card_discount_price"
@@ -58,7 +62,8 @@
             android:layout_marginBottom="0dp"
             android:layout_toEndOf="@+id/card_image"
             android:fontFamily="@font/nanumsquareroundb"
-            android:text="DiscountPrice" />
+            android:text="DiscountPrice"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/card_discount_rate"
@@ -69,7 +74,8 @@
             android:layout_marginBottom="2dp"
             android:layout_toEndOf="@+id/card_image"
             android:fontFamily="@font/nanumsquareroundb"
-            android:text="DiscountRate 할인" />
+            android:text="DiscountRate 할인"
+            android:textColor="#FFFFFF" />
 
     </RelativeLayout>
 
