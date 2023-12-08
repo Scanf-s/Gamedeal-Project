@@ -4,8 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -18,9 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.ggamdeal.app.home.adapter.ActionElementAdapter;
+import com.ggamdeal.app.home.adapter.CasualElementAdpater;
+import com.ggamdeal.app.home.adapter.HorrorElementAdapter;
+import com.ggamdeal.app.home.adapter.IndieElementAdapter;
+import com.ggamdeal.app.home.adapter.TopElementAdapter;
+import com.ggamdeal.app.wishlist.WishlistFragment;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.ggamdeal.app.R;
 
@@ -31,7 +40,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private FloatingActionButton fabScrollToTop;
     private Handler handler = new Handler();
     private final int DELAY_MS = 3000; // 3초
     private final int PERIOD_MS = 3000; // 3초
@@ -40,28 +48,28 @@ public class HomeActivity extends AppCompatActivity {
     private RecyclerView actionRecyclerView;
     private RecyclerView casualRecyclerView;
     private RecyclerView horrorRecyclerView;
+    private RecyclerView indieRecyclerView;
     private TopElementAdapter topAdapter;
     private ActionElementAdapter actionAdapter;
     private CasualElementAdpater casualAdapter;
     private HorrorElementAdapter horrorAdapter;
+    private IndieElementAdapter indieAdapter;
+
     TextView showMore1;
     TextView showMore2;
     TextView showMore3;
+    TextView showMore4;
     CircleIndicator3 indicator;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    Toolbar toolbar;
+    BottomNavigationView navigationBarView;
+    FirebaseUser currentUser;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.homepage);
-
-        Log.d("AutoSlide", "AutoSlide 실행됨");
-        startAutoSlide();
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    private void init() {
+        toolbar = findViewById(R.id.toolbar);
+        navigationBarView = findViewById(R.id.bottom_navigation);
 
         // ViewPager 설정
         homeTopViewPager = findViewById(R.id.homeTopViewPager);
@@ -80,25 +88,49 @@ public class HomeActivity extends AppCompatActivity {
         horrorAdapter = new HorrorElementAdapter(this);
         horrorRecyclerView.setAdapter(horrorAdapter);
 
+        indieRecyclerView = findViewById(R.id.homeMiddleRecyclerView4);
+        indieAdapter = new IndieElementAdapter(this);
+        indieRecyclerView.setAdapter(indieAdapter);
+
         // CircleIndicator 설정
         indicator = findViewById(R.id.homeTopElementPageIndicator);
         indicator.setViewPager(homeTopViewPager);
 
         drawerLayout = findViewById(R.id.drawerLayout);
+
+        navigationView = findViewById(R.id.navigationView);
+
+        //더보기 버튼 설정
+        showMore1 = findViewById(R.id.homeMiddleTextTitleSecondary);
+        showMore2 = findViewById(R.id.homeMiddleTextTitleSecondary2);
+        showMore3 = findViewById(R.id.homeMiddleTextTitleSecondary3);
+        showMore4 = findViewById(R.id.homeMiddleTextTitleSecondary4);
+
+        //Firebase 설정
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("Firebase", "현재 로그인 된 유저의 정보를 가져옵니다.");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.homepage);
+
+        Log.d("AutoSlide", "AutoSlide 실행됨");
+        startAutoSlide();
+
+        //초기화 함수 실행
+        init();
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         toggle.syncState();
 
-        navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if (id == R.id.item_myinfo) {
                 Log.d("DrawerINFO", "내 정보 버튼 클릭");
-            } else if (id == R.id.item_community) {
-                Log.d("DrawerINFO", "커뮤니티 버튼 클릭");
-            } else if (id == R.id.item_wishlist) {
-                Log.d("DrawerINFO", "위시리스트 버튼 클릭");
             } else if (id == R.id.item_logout) {
                 Log.d("DrawerINFO", "로그아웃");
                 signOut();
@@ -107,10 +139,8 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
-        //더보기 버튼 설정
-        showMore1 = findViewById(R.id.homeMiddleTextTitleSecondary);
         showMore1.setOnClickListener(v -> {
-            if(actionRecyclerView.getVisibility() == View.GONE) {
+            if (actionRecyclerView.getVisibility() == View.GONE) {
                 actionRecyclerView.setAlpha(0f);
                 actionRecyclerView.setVisibility(View.VISIBLE);
                 actionRecyclerView.animate()
@@ -118,8 +148,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setDuration(500)
                         .setListener(null);
                 showMore1.setText("닫기");
-            }
-            else if((actionRecyclerView.getVisibility() == View.VISIBLE) && showMore1.getText().equals("닫기")){
+            } else if ((actionRecyclerView.getVisibility() == View.VISIBLE) && showMore1.getText().equals("닫기")) {
                 actionRecyclerView.animate()
                         .alpha(0f)
                         .setDuration(500)
@@ -133,8 +162,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //더보기 버튼 설정
-        showMore2 = findViewById(R.id.homeMiddleTextTitleSecondary2);
         showMore2.setOnClickListener(v -> {
             if (casualRecyclerView.getVisibility() == View.GONE) {
                 casualRecyclerView.setAlpha(0f);
@@ -170,8 +197,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        //더보기 버튼 설정
-        showMore3 = findViewById(R.id.homeMiddleTextTitleSecondary3);
         showMore3.setOnClickListener(v -> {
             if (horrorRecyclerView.getVisibility() == View.GONE) {
                 horrorRecyclerView.setAlpha(0f);
@@ -201,14 +226,74 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("USERINFO", "현재 로그인 된 유저의 정보를 가져옵니다.");
+        showMore4.setOnClickListener(v -> {
+            if (indieRecyclerView.getVisibility() == View.GONE) {
+                indieRecyclerView.setAlpha(0f);
+                indieRecyclerView.setVisibility(View.VISIBLE);
+                indieRecyclerView.animate()
+                        .alpha(1f)
+                        .setDuration(500)
+                        .setListener(null);
+                showMore4.setText("닫기");
+
+                // Hide homeMiddleRecyclerView when homeMiddleRecyclerView2 is expanded
+                actionRecyclerView.setVisibility(View.GONE);
+                casualRecyclerView.setVisibility(View.GONE);
+                showMore1.setText("더보기");
+                showMore2.setText("더보기");
+                showMore3.setText("더보기");
+            } else if ((indieRecyclerView.getVisibility() == View.VISIBLE) && showMore4.getText().equals("닫기")) {
+                indieRecyclerView.animate()
+                        .alpha(0f)
+                        .setDuration(500)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                indieRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
+                            }
+                        });
+                showMore4.setText("더보기");
+            }
+        });
+
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
             View headerView = navigationView.getHeaderView(0);
             TextView userName = headerView.findViewById(R.id.username);
             userName.setText(userEmail);
         }
+
+        navigationBarView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.item_home) {
+                return true;
+            }
+
+            if (itemId == R.id.item_community) {
+                return true;
+            }
+
+            if (itemId == R.id.item_wishlist) {
+                transferTo(WishlistFragment.newInstance("param1", "param2"));
+                return true;
+            }
+
+            if (itemId == R.id.item_news) {
+                return true;
+            }
+
+            return false;
+        });
+
+        navigationBarView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.layout.homepage) {
+                }
+            }
+        });
+
     }
 
     @Override
@@ -245,6 +330,12 @@ public class HomeActivity extends AppCompatActivity {
         }
     };
 
+    private void transferTo(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
+    }
+
     private void startAutoSlide() {
         handler.postDelayed(runnable, DELAY_MS);
     }
@@ -252,4 +343,5 @@ public class HomeActivity extends AppCompatActivity {
     private void stopAutoSlide() {
         handler.removeCallbacks(runnable);
     }
+
 }

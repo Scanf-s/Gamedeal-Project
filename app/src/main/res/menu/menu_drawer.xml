@@ -6,12 +6,6 @@
         android:id="@+id/item_myinfo"
         android:title="내 정보" />
     <item
-        android:id="@+id/item_community"
-        android:title="커뮤니티" />
-    <item
-        android:id="@+id/item_wishlist"
-        android:title="위시 리스트 설정" />
-    <item
         android:id="@+id/item_logout"
         android:title="로그아웃" />
 

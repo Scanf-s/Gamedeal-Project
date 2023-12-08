@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/item_community"
+        android:title="커뮤니티"
+        android:icon="@drawable/ic_community"/>
+
+    <item
+        android:id="@+id/item_wishlist"
+        android:title="위시 리스트"
+        android:icon="@drawable/ic_favorites"/>
+
+    <item
+        android:id="@+id/item_news"
+        android:enabled="true"
+        android:icon="@drawable/ic_news"
+        android:title="게임 뉴스" />
+</menu>

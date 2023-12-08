@@ -1,4 +1,4 @@
-package com.ggamdeal.app.home;
+package com.ggamdeal.app.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ggamdeal.app.R;
+import com.ggamdeal.app.home.GameInfo;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,24 +23,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorrorElementAdapter extends RecyclerView.Adapter<HorrorElementAdapter.ViewHolder> {
+public class IndieElementAdapter extends RecyclerView.Adapter<IndieElementAdapter.ViewHolder> {
 
     private String TAG = "FirebaseInfo";
     private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
     private Context mContext;
     protected List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public HorrorElementAdapter(Context context) {
+    public IndieElementAdapter(Context context) {
         mContext = context;
-        getHorrorDataFromFirestore();
+        getIndieDataFromFirestore();
     }
 
     @NonNull
     @Override
-    public HorrorElementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IndieElementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.homepage_middlecardview, parent, false);
-        return new HorrorElementAdapter.ViewHolder(itemView);
+        return new IndieElementAdapter.ViewHolder(itemView);
     }
 
     @Override
@@ -95,8 +96,8 @@ public class HorrorElementAdapter extends RecyclerView.Adapter<HorrorElementAdap
     }
 
 
-    private void getHorrorDataFromFirestore() {
-        CollectionReference colref = db.collection("Game").document("Steam").collection("Horror");
+    private void getIndieDataFromFirestore() {
+        CollectionReference colref = db.collection("Game").document("Steam").collection("Indie");
         colref.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 if (task.isSuccessful()) {

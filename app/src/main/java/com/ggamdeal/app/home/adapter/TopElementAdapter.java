@@ -1,4 +1,4 @@
-package com.ggamdeal.app.home;
+package com.ggamdeal.app.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ggamdeal.app.R;
+import com.ggamdeal.app.home.GameInfo;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -22,24 +23,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpater.ViewHolder> {
+public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.ViewHolder> {
 
-    private String TAG = "FirebaseInfo";
-    private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
+    private static final String TAG = "FirebaseInfo";
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Context mContext;
-    protected List<GameInfo> gameInfoList = new ArrayList<>();
+    private List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public CasualElementAdpater(Context context) {
+    public TopElementAdapter(Context context) {
         mContext = context;
-        getCasualDataFromFirestore();
+        getActionDataFromFirestore();
     }
 
     @NonNull
     @Override
-    public CasualElementAdpater.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.homepage_middlecardview, parent, false);
-        return new CasualElementAdpater.ViewHolder(itemView);
+                .inflate(R.layout.item_image, parent, false);
+        return new ViewHolder(itemView);
     }
 
     @Override
@@ -50,10 +51,8 @@ public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpa
                 .load(gameInfo.getImageUrl())
                 .into(holder.imageView);
 
-        holder.titleTextView.setText(gameInfo.getTitle());
+        holder.titleView.setText(gameInfo.getTitle());
         holder.discountRateView.setText(gameInfo.getDiscountRate());
-        holder.originalPriceView.setText(gameInfo.getOriginalPrice());
-        holder.discountPriceView.setText(gameInfo.getDiscountPrice());
         holder.setGameUrl(gameInfo.getGameLink());
     }
 
@@ -63,21 +62,15 @@ public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpa
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView imageView;
-        TextView titleTextView;
-        TextView discountRateView;
-        TextView originalPriceView;
-        TextView discountPriceView;
-
         private String gameUrl;
-
+        ImageView imageView;
+        TextView titleView;
+        TextView discountRateView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.card_image);
-            titleTextView = itemView.findViewById(R.id.card_title);
-            originalPriceView = itemView.findViewById(R.id.card_original_price);
-            discountPriceView = itemView.findViewById(R.id.card_discount_price);
-            discountRateView = itemView.findViewById(R.id.card_discount_rate);
+            imageView = itemView.findViewById(R.id.topImageView);
+            titleView = itemView.findViewById(R.id.topImageTitle);
+            discountRateView = itemView.findViewById(R.id.topImageDiscountRate);
             itemView.setOnClickListener(this);
         }
 
@@ -94,11 +87,10 @@ public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpa
         }
     }
 
-
-    private void getCasualDataFromFirestore() {
-        CollectionReference colref = db.collection("Game").document("Steam").collection("Casual");
+    private void getActionDataFromFirestore() {
+        CollectionReference colref = db.collection("Game").document("Steam").collection("Action");
         colref.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
+            if(task.isSuccessful()){
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String discountPrice = document.getString("discountPrice");
