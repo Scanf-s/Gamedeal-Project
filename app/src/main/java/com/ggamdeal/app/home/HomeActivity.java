@@ -19,11 +19,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.ggamdeal.app.community.CommunityFragment;
 import com.ggamdeal.app.home.adapter.ActionElementAdapter;
 import com.ggamdeal.app.home.adapter.CasualElementAdpater;
 import com.ggamdeal.app.home.adapter.HorrorElementAdapter;
 import com.ggamdeal.app.home.adapter.IndieElementAdapter;
 import com.ggamdeal.app.home.adapter.TopElementAdapter;
+import com.ggamdeal.app.news.NewsFragment;
 import com.ggamdeal.app.wishlist.WishlistFragment;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -271,6 +273,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             if (itemId == R.id.item_community) {
+                transferTo(CommunityFragment.newInstance("param1", "param2"));
                 return true;
             }
 
@@ -280,18 +283,15 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             if (itemId == R.id.item_news) {
+                transferTo(NewsFragment.newInstance("param1", "param2"));
                 return true;
             }
 
             return false;
         });
 
-        navigationBarView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.layout.homepage) {
-                }
-            }
+        navigationBarView.setOnItemReselectedListener(item -> {
+
         });
 
     }
