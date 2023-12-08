@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(welcomeIntent);
         } else {
             //최초실행 아니면 loginpage로 넘어감
+            //로그인이 이미 되어있는 상태면, HomeActivity로 넘어감
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         }

@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loginpage);
 
-        // Initialize Firebase Auth
         initFirebaseAuth();
 
         emailInputField = findViewById(R.id.emailInputField);
@@ -49,24 +48,18 @@ public class LoginActivity extends AppCompatActivity {
 
         checkEmailFormat();
 
-        emailLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailInputField.getText().toString();
-                String password = passwordInputField.getText().toString();
+        emailLoginButton.setOnClickListener(v -> {
+            String email = emailInputField.getText().toString();
+            String password = passwordInputField.getText().toString();
 
-                emailLogin(email, password);
-            }
+            emailLogin(email, password);
         });
 
-        emailSignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailInputField.getText().toString();
-                String password = passwordInputField.getText().toString();
+        emailSignUpButton.setOnClickListener(v -> {
+            String email = emailInputField.getText().toString();
+            String password = passwordInputField.getText().toString();
 
-                emailSignUp(email, password);
-            }
+            emailSignUp(email, password);
         });
 
         //Welcomepage로 돌아가기 위해 비밀번호 변경 버튼을 따로 설정해줌 (이후 삭제 예정)
@@ -81,7 +74,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         //로그인 된 상태면, Intent를 통해 LoginComplete.class로 넘어감
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             updateUI(currentUser);
@@ -89,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initFirebaseAuth() {
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -148,13 +139,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()) {
-                    emailErrorMessage.setText("이메일 형식으로 입력해주세요.");    // 경고 메세지
-                    emailInputField.setBackgroundResource(R.drawable.red_edittext);  // 적색 테두리 적용
+                    emailErrorMessage.setText("이메일 형식으로 입력해주세요.");
+                    emailInputField.setBackgroundResource(R.drawable.red_edittext);
                 } else {
-                    emailErrorMessage.setText("");         //에러 메세지 제거
-                    emailInputField.setBackgroundResource(R.drawable.white_edittext);  //테투리 흰색으로 변경
+                    emailErrorMessage.setText("");
+                    emailInputField.setBackgroundResource(R.drawable.white_edittext);
                 }
-            }// afterTextChanged()..
+            }
         });
     }
 }
