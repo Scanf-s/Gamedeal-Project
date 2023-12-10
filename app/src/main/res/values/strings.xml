@@ -11,4 +11,6 @@
     <string name="wishlist">위시리스트 입니다</string>
     <string name="community">커뮤니티 페이지 입니다</string>
     <string name="news">게임 뉴스 페이지 입니다</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,11 +28,11 @@ public class HorrorElementAdapter extends RecyclerView.Adapter<HorrorElementAdap
 
     private String TAG = "FirebaseInfo";
     private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
-    private Context mContext;
+    private Fragment fragment;
     protected List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public HorrorElementAdapter(Context context) {
-        mContext = context;
+    public HorrorElementAdapter(Fragment fragment) {
+        this.fragment = fragment;
         getHorrorDataFromFirestore();
     }
 
@@ -47,7 +48,7 @@ public class HorrorElementAdapter extends RecyclerView.Adapter<HorrorElementAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameInfo gameInfo = gameInfoList.get(position);
 
-        Glide.with(mContext)
+        Glide.with(fragment)
                 .load(gameInfo.getImageUrl())
                 .into(holder.imageView);
 

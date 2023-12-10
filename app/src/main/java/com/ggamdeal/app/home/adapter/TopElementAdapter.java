@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,11 +28,11 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
 
     private static final String TAG = "FirebaseInfo";
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private Context mContext;
+    private Fragment fragment;
     private List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public TopElementAdapter(Context context) {
-        mContext = context;
+    public TopElementAdapter(Fragment fragment) {
+        this.fragment = fragment;
         getActionDataFromFirestore();
     }
 
@@ -47,7 +48,7 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameInfo gameInfo = gameInfoList.get(position);
 
-        Glide.with(mContext)
+        Glide.with(fragment)
                 .load(gameInfo.getImageUrl())
                 .into(holder.imageView);
 

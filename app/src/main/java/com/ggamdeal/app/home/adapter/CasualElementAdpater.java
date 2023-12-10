@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,11 +28,11 @@ public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpa
 
     private String TAG = "FirebaseInfo";
     private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
-    private Context mContext;
+    private Fragment fragment;
     protected List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public CasualElementAdpater(Context context) {
-        mContext = context;
+    public CasualElementAdpater(Fragment fragment) {
+        this.fragment = fragment;
         getCasualDataFromFirestore();
     }
 
@@ -47,7 +48,7 @@ public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpa
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameInfo gameInfo = gameInfoList.get(position);
 
-        Glide.with(mContext)
+        Glide.with(fragment)
                 .load(gameInfo.getImageUrl())
                 .into(holder.imageView);
 

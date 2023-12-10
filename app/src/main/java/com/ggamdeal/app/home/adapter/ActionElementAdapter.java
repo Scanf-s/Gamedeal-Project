@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,11 +29,11 @@ public class ActionElementAdapter extends RecyclerView.Adapter<ActionElementAdap
 
     private String TAG = "FirebaseInfo";
     private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
-    private Context mContext;
+    private Fragment fragment;
     protected List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public ActionElementAdapter(Context context) {
-        mContext = context;
+    public ActionElementAdapter(Fragment fragment) {
+        this.fragment = fragment;
         getActionDataFromFirestore();
     }
 
@@ -47,7 +49,7 @@ public class ActionElementAdapter extends RecyclerView.Adapter<ActionElementAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GameInfo gameInfo = gameInfoList.get(position);
 
-        Glide.with(mContext)
+        Glide.with(fragment)
                 .load(gameInfo.getImageUrl())
                 .into(holder.imageView);
 
