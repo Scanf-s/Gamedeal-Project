@@ -287,6 +287,7 @@ public class HomeFragment extends Fragment {
                             }
                         });
                 showMore4.setText("더보기");
+
             }
         });
 
