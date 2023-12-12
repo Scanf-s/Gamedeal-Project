@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
     tools:context=".home.HomeFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -104,12 +105,13 @@
                 android:id="@+id/HomeMiddleMainTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/light_blue"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:layout_marginTop="20dp"
                 android:paddingLeft="30dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                android:fontFamily="@font/nanumsquareroundeb"
                 android:text="태그 별 할인 상품을 확인해보세요"
-                android:background="@color/light_blue"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -124,7 +126,7 @@
                 android:shadowColor="#A9A9A9"
                 android:shadowDy="7.0"
                 android:shadowRadius="2.0"
-                android:text="Action 태그 할인 상품"
+                android:text="Action"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="@id/guideline3"
@@ -165,7 +167,7 @@
                 android:shadowColor="#A9A9A9"
                 android:shadowDy="7.0"
                 android:shadowRadius="2.0"
-                android:text="Casual 태그 할인 상품"
+                android:text="Adventure"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -207,7 +209,7 @@
                 android:shadowColor="#A9A9A9"
                 android:shadowDy="7.0"
                 android:shadowRadius="2.0"
-                android:text="Horror 태그 할인 상품"
+                android:text="Casual"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -249,7 +251,7 @@
                 android:shadowColor="#A9A9A9"
                 android:shadowDy="7.0"
                 android:shadowRadius="2.0"
-                android:text="Indie 태그 할인 상품"
+                android:text="Horror"
                 android:textColor="@color/black"
                 android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -281,6 +283,132 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/homeMiddleTextTitle4" />
+
+            <TextView
+                android:id="@+id/homeMiddleTextTitle5"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:shadowColor="#A9A9A9"
+                android:shadowDy="7.0"
+                android:shadowRadius="2.0"
+                android:text="Indie"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/homeMiddleRecyclerView4" />
+
+            <TextView
+                android:id="@+id/homeMiddleTextTitleSecondary5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:fontFamily="@font/nanumsqarerountr"
+                android:gravity="center"
+                android:text="더보기"
+                android:textColor="@color/gray"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/homeMiddleTextTitle5"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/homeMiddleTextTitle5"
+                app:layout_constraintTop_toTopOf="@+id/homeMiddleTextTitle5" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeMiddleRecyclerView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/homeMiddleTextTitle5" />
+
+            <TextView
+                android:id="@+id/homeMiddleTextTitle6"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:shadowColor="#A9A9A9"
+                android:shadowDy="7.0"
+                android:shadowRadius="2.0"
+                android:text="Puzzle"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/homeMiddleRecyclerView5" />
+
+            <TextView
+                android:id="@+id/homeMiddleTextTitleSecondary6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:fontFamily="@font/nanumsqarerountr"
+                android:gravity="center"
+                android:text="더보기"
+                android:textColor="@color/gray"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/homeMiddleTextTitle6"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/homeMiddleTextTitle6"
+                app:layout_constraintTop_toTopOf="@+id/homeMiddleTextTitle6" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeMiddleRecyclerView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/homeMiddleTextTitle6" />
+
+            <TextView
+                android:id="@+id/homeMiddleTextTitle7"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:shadowColor="#A9A9A9"
+                android:shadowDy="7.0"
+                android:shadowRadius="2.0"
+                android:text="Simulation"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@id/homeMiddleRecyclerView6" />
+
+            <TextView
+                android:id="@+id/homeMiddleTextTitleSecondary7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:fontFamily="@font/nanumsqarerountr"
+                android:gravity="center"
+                android:text="더보기"
+                android:textColor="@color/gray"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/homeMiddleTextTitle7"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toEndOf="@+id/homeMiddleTextTitle7"
+                app:layout_constraintTop_toTopOf="@+id/homeMiddleTextTitle7" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeMiddleRecyclerView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/homeMiddleTextTitle7" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

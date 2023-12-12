@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.ggamdeal.app.R;
 
@@ -61,6 +63,15 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
+
+        WebView webView = view.findViewById(R.id.webview);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+
+        // 여기에 원하는 URL을 입력하세요.
+        webView.loadUrl("https://m.gamemeca.com/news.php");
+
+        return view;
     }
 }

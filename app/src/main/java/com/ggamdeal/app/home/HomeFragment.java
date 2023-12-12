@@ -19,9 +19,12 @@ import android.widget.TextView;
 
 import com.ggamdeal.app.R;
 import com.ggamdeal.app.home.adapter.ActionElementAdapter;
+import com.ggamdeal.app.home.adapter.AdventureElementAdapter;
 import com.ggamdeal.app.home.adapter.CasualElementAdapter;
 import com.ggamdeal.app.home.adapter.HorrorElementAdapter;
 import com.ggamdeal.app.home.adapter.IndieElementAdapter;
+import com.ggamdeal.app.home.adapter.PuzzleElementAdapter;
+import com.ggamdeal.app.home.adapter.SimulationElementAdapter;
 import com.ggamdeal.app.home.adapter.TopElementAdapter;
 
 import me.relex.circleindicator.CircleIndicator3;
@@ -39,15 +42,21 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private TopElementAdapter topAdapter;
     private ActionElementAdapter actionAdapter;
+    private AdventureElementAdapter adventureAdapter;
     private CasualElementAdapter casualAdapter;
     private HorrorElementAdapter horrorAdapter;
     private IndieElementAdapter indieAdapter;
+    private PuzzleElementAdapter puzzleAdapter;
+    private SimulationElementAdapter simulationAdapter;
 
     private ViewPager2 homeTopViewPager;
     private RecyclerView actionRecyclerView;
+    private RecyclerView adventureRecyclerView;
     private RecyclerView casualRecyclerView;
     private RecyclerView horrorRecyclerView;
     private RecyclerView indieRecyclerView;
+    private RecyclerView puzzleRecyclerView;
+    private RecyclerView simulationRecyclerView;
 
     private Handler handler = new Handler();
     CircleIndicator3 indicator;
@@ -55,6 +64,9 @@ public class HomeFragment extends Fragment {
     TextView showMore2;
     TextView showMore3;
     TextView showMore4;
+    TextView showMore5;
+    TextView showMore6;
+    TextView showMore7;
 
     public HomeFragment() {}
 
@@ -105,17 +117,29 @@ public class HomeFragment extends Fragment {
         actionAdapter = new ActionElementAdapter(this);
         actionRecyclerView.setAdapter(actionAdapter);
 
-        casualRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView2);
+        adventureRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView2);
+        adventureAdapter = new AdventureElementAdapter(this);
+        adventureRecyclerView.setAdapter(adventureAdapter);
+
+        casualRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView3);
         casualAdapter = new CasualElementAdapter(this);
         casualRecyclerView.setAdapter(casualAdapter);
 
-        horrorRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView3);
+        horrorRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView4);
         horrorAdapter = new HorrorElementAdapter(this);
         horrorRecyclerView.setAdapter(horrorAdapter);
 
-        indieRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView4);
+        indieRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView5);
         indieAdapter = new IndieElementAdapter(this);
         indieRecyclerView.setAdapter(indieAdapter);
+
+        puzzleRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView6);
+        puzzleAdapter = new PuzzleElementAdapter(this);
+        puzzleRecyclerView.setAdapter(puzzleAdapter);
+
+        simulationRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView7);
+        simulationAdapter = new SimulationElementAdapter(this);
+        simulationRecyclerView.setAdapter(simulationAdapter);
 
         // CircleIndicator 설정
         indicator = view.findViewById(R.id.indicatior);
@@ -128,126 +152,41 @@ public class HomeFragment extends Fragment {
         showMore2 = view.findViewById(R.id.homeMiddleTextTitleSecondary2);
         showMore3 = view.findViewById(R.id.homeMiddleTextTitleSecondary3);
         showMore4 = view.findViewById(R.id.homeMiddleTextTitleSecondary4);
+        showMore5 = view.findViewById(R.id.homeMiddleTextTitleSecondary5);
+        showMore6 = view.findViewById(R.id.homeMiddleTextTitleSecondary6);
+        showMore7 = view.findViewById(R.id.homeMiddleTextTitleSecondary7);
 
         Log.d("AutoSlide", "AutoSlide 실행됨");
         startAutoSlide();
 
-        showMore1.setOnClickListener(v -> {
-            if (actionRecyclerView.getVisibility() == View.GONE) {
-                actionRecyclerView.setAlpha(0f);
-                actionRecyclerView.setVisibility(View.VISIBLE);
-                actionRecyclerView.animate()
-                        .alpha(1f)
-                        .setDuration(500)
-                        .setListener(null);
-                showMore1.setText("닫기");
-            } else if ((actionRecyclerView.getVisibility() == View.VISIBLE) && showMore1.getText().equals("닫기")) {
-                actionRecyclerView.animate()
-                        .alpha(0f)
-                        .setDuration(500)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                actionRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
-                            }
-                        });
-                showMore1.setText("더보기");
-            }
-        });
-
-        showMore2.setOnClickListener(v -> {
-            if (casualRecyclerView.getVisibility() == View.GONE) {
-                casualRecyclerView.setAlpha(0f);
-                casualRecyclerView.setVisibility(View.VISIBLE);
-                casualRecyclerView.animate()
-                        .alpha(1f)
-                        .setDuration(500)
-                        .setListener(null);
-                showMore2.setText("닫기");
-
-                //Indie 태그를 열었다면, Action 태그를 닫아야함
-                actionRecyclerView.animate()
-                        .alpha(0f)
-                        .setDuration(500)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                actionRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
-                            }
-                        });
-                showMore1.setText("더보기");
-            } else if ((casualRecyclerView.getVisibility() == View.VISIBLE) && showMore2.getText().equals("닫기")) {
-                casualRecyclerView.animate()
-                        .alpha(0f)
-                        .setDuration(500)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                casualRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
-                            }
-                        });
-                showMore2.setText("더보기");
-            }
-        });
-
-        showMore3.setOnClickListener(v -> {
-            if (horrorRecyclerView.getVisibility() == View.GONE) {
-                horrorRecyclerView.setAlpha(0f);
-                horrorRecyclerView.setVisibility(View.VISIBLE);
-                horrorRecyclerView.animate()
-                        .alpha(1f)
-                        .setDuration(500)
-                        .setListener(null);
-                showMore3.setText("닫기");
-
-                actionRecyclerView.setVisibility(View.GONE);
-                casualRecyclerView.setVisibility(View.GONE);
-                showMore1.setText("더보기");
-                showMore2.setText("더보기");
-            } else if ((horrorRecyclerView.getVisibility() == View.VISIBLE) && showMore3.getText().equals("닫기")) {
-                horrorRecyclerView.animate()
-                        .alpha(0f)
-                        .setDuration(500)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                horrorRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
-                            }
-                        });
-                showMore3.setText("더보기");
-            }
-        });
-
-        showMore4.setOnClickListener(v -> {
-            if (indieRecyclerView.getVisibility() == View.GONE) {
-                indieRecyclerView.setAlpha(0f);
-                indieRecyclerView.setVisibility(View.VISIBLE);
-                indieRecyclerView.animate()
-                        .alpha(1f)
-                        .setDuration(500)
-                        .setListener(null);
-                showMore4.setText("닫기");
-
-                actionRecyclerView.setVisibility(View.GONE);
-                casualRecyclerView.setVisibility(View.GONE);
-                showMore1.setText("더보기");
-                showMore2.setText("더보기");
-                showMore3.setText("더보기");
-            } else if ((indieRecyclerView.getVisibility() == View.VISIBLE) && showMore4.getText().equals("닫기")) {
-                indieRecyclerView.animate()
-                        .alpha(0f)
-                        .setDuration(500)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                indieRecyclerView.setVisibility(View.GONE); // INVISIBLE 대신 GONE으로 변경
-                            }
-                        });
-                showMore4.setText("더보기");
-
-            }
-        });
+        showMoreButtonListener(showMore1, actionRecyclerView, "Action");
+        showMoreButtonListener(showMore2, adventureRecyclerView, "Adventure");
+        showMoreButtonListener(showMore3, casualRecyclerView, "Casual");
+        showMoreButtonListener(showMore4, horrorRecyclerView, "Horror");
+        showMoreButtonListener(showMore5, indieRecyclerView, "Indie");
+        showMoreButtonListener(showMore6, puzzleRecyclerView, "Puzzle");
+        showMoreButtonListener(showMore7, simulationRecyclerView, "Simulation");
     }
+
+    private void showMoreButtonListener(TextView showMore, RecyclerView recyclerView, String defaultText) {
+        showMore.setOnClickListener(v -> {
+            boolean isExpanded = recyclerView.getVisibility() == View.VISIBLE;
+            float targetAlpha = isExpanded ? 0f : 1f;
+            int visibilityAfterAnimation = isExpanded ? View.GONE : View.VISIBLE;
+
+            recyclerView.animate()
+                    .alpha(targetAlpha)
+                    .setDuration(500)
+                    .setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                recyclerView.setVisibility(visibilityAfterAnimation);
+            }
+        });
+
+            showMore.setText(isExpanded ? "더보기" : "닫기");
+    });
+}
 
     private Runnable runnable = new Runnable() {
         public void run() {
