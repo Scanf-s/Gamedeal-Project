@@ -1,6 +1,5 @@
 package com.ggamdeal.app.home.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -40,7 +39,7 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_image, parent, false);
+                .inflate(R.layout.viewpage2_topelement, parent, false);
         return new ViewHolder(itemView);
     }
 

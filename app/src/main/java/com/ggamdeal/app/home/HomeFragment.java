@@ -47,11 +47,6 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    Toolbar toolbar;
     private TopElementAdapter topAdapter;
     private ActionElementAdapter actionAdapter;
     private CasualElementAdpater casualAdapter;
@@ -65,22 +60,13 @@ public class HomeFragment extends Fragment {
     private RecyclerView indieRecyclerView;
 
     private Handler handler = new Handler();
-
-    ActionBarDrawerToggle toggle;
     CircleIndicator3 indicator;
-    DrawerLayout drawerLayout;
-
     TextView showMore1;
     TextView showMore2;
     TextView showMore3;
     TextView showMore4;
 
-    NavigationView navigationView;
-    FirebaseUser currentUser;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    public HomeFragment() {}
 
     /**
      * Use this factory method to create a new instance of
@@ -104,24 +90,22 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        navigationView = view.findViewById(R.id.navigationView);
         // ViewPager 설정
         homeTopViewPager = view.findViewById(R.id.homeTopViewPager);
         topAdapter = new TopElementAdapter(this);
@@ -147,28 +131,11 @@ public class HomeFragment extends Fragment {
         indicator = view.findViewById(R.id.homeTopElementPageIndicator);
         indicator.setViewPager(homeTopViewPager);
 
-        drawerLayout = view.findViewById(R.id.drawerLayout);
-
         //더보기 버튼 설정
         showMore1 = view.findViewById(R.id.homeMiddleTextTitleSecondary);
         showMore2 = view.findViewById(R.id.homeMiddleTextTitleSecondary2);
         showMore3 = view.findViewById(R.id.homeMiddleTextTitleSecondary3);
         showMore4 = view.findViewById(R.id.homeMiddleTextTitleSecondary4);
-
-        toolbar = view.findViewById(R.id.toolbar);
-        // Access the activity and set the toolbar
-        if (getActivity() != null && getActivity() instanceof AppCompatActivity) {
-            AppCompatActivity activity = (AppCompatActivity) getActivity();
-            activity.setSupportActionBar(toolbar);
-            activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-        toggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, R.string.drawer_open, R.string.drawer_close);
-        toggle.syncState();
-
-        //Firebase 설정
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d("Firebase", "현재 로그인 된 유저의 정보를 가져옵니다.");
 
         Log.d("AutoSlide", "AutoSlide 실행됨");
         startAutoSlide();
@@ -241,7 +208,6 @@ public class HomeFragment extends Fragment {
                         .setListener(null);
                 showMore3.setText("닫기");
 
-                // Hide homeMiddleRecyclerView when homeMiddleRecyclerView2 is expanded
                 actionRecyclerView.setVisibility(View.GONE);
                 casualRecyclerView.setVisibility(View.GONE);
                 showMore1.setText("더보기");
@@ -270,7 +236,6 @@ public class HomeFragment extends Fragment {
                         .setListener(null);
                 showMore4.setText("닫기");
 
-                // Hide homeMiddleRecyclerView when homeMiddleRecyclerView2 is expanded
                 actionRecyclerView.setVisibility(View.GONE);
                 casualRecyclerView.setVisibility(View.GONE);
                 showMore1.setText("더보기");
@@ -290,28 +255,8 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.item_myinfo) {
-                Log.d("DrawerINFO", "내 정보 버튼 클릭");
-            } else if (id == R.id.item_logout) {
-                Log.d("DrawerINFO", "로그아웃");
-                signOut();
-            }
-            return false;
-        });
-
-        if (currentUser != null) {
-            String userEmail = currentUser.getEmail();
-            View headerView = navigationView.getHeaderView(0);
-            TextView userName = headerView.findViewById(R.id.username);
-            userName.setText(userEmail);
-        }
     }
-    /**
-     * 자동으로 다음 페이지로 넘어갈 수 있도록 만드는 함수
-     */
+
     private Runnable runnable = new Runnable() {
         public void run() {
             if (topAdapter.getItemCount() > 0) {
@@ -339,27 +284,5 @@ public class HomeFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         stopAutoSlide(); // 자동 슬라이딩 정리
-    }
-
-    private void signOut() {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signOut();
-
-        if (firebaseAuth.getCurrentUser() == null) {
-            Log.d("Firebase", "signOut:success");
-
-            Intent intent = new Intent(requireContext(), LoginActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            requireActivity().finish();
-        }
-        else Log.d("Firebase", "signOut:failure");
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
