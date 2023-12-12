@@ -52,7 +52,6 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
                 .into(holder.imageView);
 
         holder.titleView.setText(gameInfo.getTitle());
-        holder.discountRateView.setText(gameInfo.getDiscountRate());
         holder.setGameUrl(gameInfo.getGameLink());
     }
 
@@ -65,12 +64,10 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
         private String gameUrl;
         ImageView imageView;
         TextView titleView;
-        TextView discountRateView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.topImageView);
             titleView = itemView.findViewById(R.id.topImageTitle);
-            discountRateView = itemView.findViewById(R.id.topImageDiscountRate);
             itemView.setOnClickListener(this);
         }
 
@@ -88,18 +85,15 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
     }
 
     private void getActionDataFromFirestore() {
-        CollectionReference colref = db.collection("Game").document("Steam").collection("Action");
+        CollectionReference colref = db.collection("steam");
         colref.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String discountPrice = document.getString("discountPrice");
-                        String discountRate = document.getString("discountRate");
-                        String originalPrice = document.getString("originalPrice");
                         String imageUrl = document.getString("img");
                         String gameLink = document.getString("gameLink");
                         String titleInfo = document.getString("title");
-                        GameInfo gameInfo = new GameInfo(imageUrl, originalPrice, gameLink, discountPrice, titleInfo, discountRate + " 할인 중");
+                        GameInfo gameInfo = new GameInfo(imageUrl, gameLink, titleInfo);
                         gameInfoList.add(gameInfo);
                     }
                     notifyDataSetChanged();

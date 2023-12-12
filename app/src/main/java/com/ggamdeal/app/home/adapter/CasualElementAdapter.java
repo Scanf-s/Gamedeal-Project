@@ -1,6 +1,5 @@
 package com.ggamdeal.app.home.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
@@ -24,24 +23,24 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CasualElementAdpater extends RecyclerView.Adapter<CasualElementAdpater.ViewHolder> {
+public class CasualElementAdapter extends RecyclerView.Adapter<CasualElementAdapter.ViewHolder> {
 
     private String TAG = "FirebaseInfo";
     private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
     private Fragment fragment;
     protected List<GameInfo> gameInfoList = new ArrayList<>();
 
-    public CasualElementAdpater(Fragment fragment) {
+    public CasualElementAdapter(Fragment fragment) {
         this.fragment = fragment;
         getCasualDataFromFirestore();
     }
 
     @NonNull
     @Override
-    public CasualElementAdpater.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CasualElementAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.homepage_middlecardview, parent, false);
-        return new CasualElementAdpater.ViewHolder(itemView);
+        return new CasualElementAdapter.ViewHolder(itemView);
     }
 
     @Override

@@ -2,15 +2,10 @@ package com.ggamdeal.app.home;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -18,21 +13,16 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ggamdeal.app.R;
 import com.ggamdeal.app.home.adapter.ActionElementAdapter;
-import com.ggamdeal.app.home.adapter.CasualElementAdpater;
+import com.ggamdeal.app.home.adapter.CasualElementAdapter;
 import com.ggamdeal.app.home.adapter.HorrorElementAdapter;
 import com.ggamdeal.app.home.adapter.IndieElementAdapter;
 import com.ggamdeal.app.home.adapter.TopElementAdapter;
-import com.ggamdeal.app.login.LoginActivity;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -49,7 +39,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private TopElementAdapter topAdapter;
     private ActionElementAdapter actionAdapter;
-    private CasualElementAdpater casualAdapter;
+    private CasualElementAdapter casualAdapter;
     private HorrorElementAdapter horrorAdapter;
     private IndieElementAdapter indieAdapter;
 
@@ -116,7 +106,7 @@ public class HomeFragment extends Fragment {
         actionRecyclerView.setAdapter(actionAdapter);
 
         casualRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView2);
-        casualAdapter = new CasualElementAdpater(this);
+        casualAdapter = new CasualElementAdapter(this);
         casualRecyclerView.setAdapter(casualAdapter);
 
         horrorRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView3);
@@ -128,8 +118,10 @@ public class HomeFragment extends Fragment {
         indieRecyclerView.setAdapter(indieAdapter);
 
         // CircleIndicator 설정
-        indicator = view.findViewById(R.id.homeTopElementPageIndicator);
+        indicator = view.findViewById(R.id.indicatior);
         indicator.setViewPager(homeTopViewPager);
+        topAdapter.registerAdapterDataObserver(indicator.getAdapterDataObserver());
+        indicator.setVisibility(View.VISIBLE);
 
         //더보기 버튼 설정
         showMore1 = view.findViewById(R.id.homeMiddleTextTitleSecondary);

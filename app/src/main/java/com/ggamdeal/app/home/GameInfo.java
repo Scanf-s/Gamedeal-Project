@@ -9,8 +9,13 @@ public class GameInfo {
     private String discountRate;
 
     public GameInfo() {
-    }
+}
 
+    public GameInfo(String imageUrl, String gameLink, String title){
+        this.imageUrl = imageUrl;
+        this.gameLink = gameLink;
+        this.title = title;
+    }
     public GameInfo(String imageUrl, String originalPrice, String gameLink, String discountPrice, String title, String discountRate) {
         this.imageUrl = imageUrl;
         this.originalPrice = originalPrice;

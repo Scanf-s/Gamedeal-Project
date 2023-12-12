@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:padding="20dp"
-    android:clickable="true"
-    card_view:cardBackgroundColor="#393c3e"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="3dp"
-    card_view:contentPadding="4dp">
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="350dp"
@@ -39,7 +36,7 @@
             android:fontFamily="@font/nanumsquareroundeb"
             android:maxLines="2"
             android:text="TitleView"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
@@ -51,7 +48,7 @@
             android:layout_toEndOf="@+id/card_image"
             android:fontFamily="@font/nanumsquareroundb"
             android:text="OriginalPrice"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/card_discount_price"
@@ -63,7 +60,7 @@
             android:layout_toEndOf="@+id/card_image"
             android:fontFamily="@font/nanumsquareroundb"
             android:text="DiscountPrice"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/card_discount_rate"
@@ -75,7 +72,7 @@
             android:layout_toEndOf="@+id/card_image"
             android:fontFamily="@font/nanumsquareroundb"
             android:text="DiscountRate 할인"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/black" />
 
     </RelativeLayout>
 

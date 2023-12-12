@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+import me.relex.circleindicator.CircleIndicator3;
+
 public class HomeActivity extends AppCompatActivity {
     BottomNavigationView navigationBarView;
     DrawerLayout drawerLayout;
