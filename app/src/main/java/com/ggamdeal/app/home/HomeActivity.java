@@ -1,24 +1,22 @@
 package com.ggamdeal.app.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.ggamdeal.app.R;
 import com.ggamdeal.app.community.CommunityFragment;
-import com.ggamdeal.app.login.LoginActivity;
 import com.ggamdeal.app.news.NewsFragment;
 import com.ggamdeal.app.wishlist.WishlistFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -26,11 +24,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
-
-import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final int BACK_PRESS_INTERVAL = 2000;
+    private long backPressedTime;
     BottomNavigationView navigationBarView;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
@@ -132,6 +129,15 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if (backPressedTime + BACK_PRESS_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            moveTaskToBack(true);
+            finishAndRemoveTask();
+            System.exit(0);
+            return;
+        } else {
+            Toast.makeText(getBaseContext(), "정말 종료하시겠습니까", Toast.LENGTH_SHORT).show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

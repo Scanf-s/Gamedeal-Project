@@ -1,6 +1,7 @@
 package com.ggamdeal.app.login;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -51,22 +52,29 @@ public class LoginActivity extends AppCompatActivity {
         emailLoginButton.setOnClickListener(v -> {
             String email = emailInputField.getText().toString();
             String password = passwordInputField.getText().toString();
-
-            emailLogin(email, password);
+            if(!email.isEmpty() && !password.isEmpty()) {
+                emailLogin(email, password);
+            }
+            else{
+                showAlertDialog("이메일 또는 비밀번호를 정확히 입력해주세요");
+            }
         });
 
         emailSignUpButton.setOnClickListener(v -> {
             String email = emailInputField.getText().toString();
             String password = passwordInputField.getText().toString();
-
-            emailSignUp(email, password);
+            if(!email.isEmpty() && !password.isEmpty()) {
+                emailSignUp(email, password);
+            }
+            else{
+                showAlertDialog("이메일 또는 비밀번호를 정확히 입력해주세요");
+            }
         });
 
-        //Welcomepage로 돌아가기 위해 비밀번호 변경 버튼을 따로 설정해줌 (이후 삭제 예정)
         TextView button = findViewById(R.id.findPasswordTextButton);
         button.setOnClickListener(v -> {
-            Intent returnToWelcomeIntent = new Intent(getApplicationContext(), WelcomeActivity.class);
-            startActivity(returnToWelcomeIntent);
+            Intent findpassword = new Intent(getApplicationContext(), FindPasswordActivity.class);
+            startActivity(findpassword);
         });
     }
 
@@ -94,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         updateUI(user);
                     } else {
                         Log.d(TAG, "createUserWithEmail:failure");
-                        Toast.makeText(getApplicationContext(), "Authentication failed.",
+                        Toast.makeText(getApplicationContext(), "서버 오류로 인해 회원가입을 실패하였습니다. 잠시 후 다시 시도해주세요",
                                 Toast.LENGTH_SHORT).show();
                         updateUI(null);
                     }
@@ -111,8 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                         updateUI(user);
                     } else {
                         Log.d(TAG, "signInWithEmail:failure");
-                        Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
+                        showAlertDialog("가입된 이메일이 아니거나, 비밀번호가 일치하지 않습니다.");
                         updateUI(null);
                     }
                 });
@@ -147,5 +154,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void showAlertDialog(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("알림")
+                .setMessage(message)
+                .setPositiveButton("확인", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 }

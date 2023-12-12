@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.ggamdeal.app"
-        minSdk = 24
+        minSdk = 31
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -67,4 +67,8 @@ dependencies {
 
     // Card View
     implementation ("androidx.cardview:cardview:1.0.0")
+
+    // Splash
+    implementation ("androidx.core:core-splashscreen:1.1.0-alpha02")
+
 }
