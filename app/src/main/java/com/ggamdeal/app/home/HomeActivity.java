@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
 import com.ggamdeal.app.R;
 import com.ggamdeal.app.community.CommunityFragment;
 import com.ggamdeal.app.news.NewsFragment;
@@ -25,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements ProfileUpdateListener{
     private static final int BACK_PRESS_INTERVAL = 2000;
     private long backPressedTime;
     BottomNavigationView navigationBarView;
@@ -79,14 +81,25 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.item_myinfo) {
-                Log.d("DrawerINFO", "내 정보 버튼 클릭");
-            } else if (id == R.id.item_logout) {
+                BottomSheetFragment bottomSheet = new BottomSheetFragment();
+                bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
+            }
+            if (id == R.id.item_logout) {
                 Log.d("DrawerINFO", "로그아웃");
                 signOut();
             }
             return false;
         });
 
+        // Firebase Authentication 사용자 프로필 변경 리스너
+        FirebaseAuth.getInstance().addAuthStateListener(firebaseAuth -> {
+            FirebaseUser updatedUser = firebaseAuth.getCurrentUser();
+            if (updatedUser != null) {
+                updateNavHeader(updatedUser);
+            }
+        });
+
+        //툴바, Drawer 설정
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -94,11 +107,10 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
+        //Drawer 상단 사용자 이미지 및 이메일 정보 설정
         if (currentUser != null) {
-            String userEmail = currentUser.getEmail();
-            View headerView = navigationView.getHeaderView(0);
-            TextView userName = headerView.findViewById(R.id.username);
-            userName.setText(userEmail);
+            updateNavHeader(currentUser);
         }
     }
 
@@ -125,6 +137,21 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
         else Log.d("Firebase", "signOut:failure");
+    }
+
+    //프로필 사진 변경 시 호출되는 메서드
+    @Override
+    public void onProfileUpdated() {
+        updateNavHeader(currentUser);
+    }
+
+    private void updateNavHeader(FirebaseUser user) {
+        View headerView = navigationView.getHeaderView(0);
+        TextView userName = headerView.findViewById(R.id.username);
+        ImageView userProfileImage = headerView.findViewById(R.id.iv_image);
+
+        Glide.with(this).load(user.getPhotoUrl()).into(userProfileImage);
+        userName.setText(user.getEmail());
     }
 
     @Override

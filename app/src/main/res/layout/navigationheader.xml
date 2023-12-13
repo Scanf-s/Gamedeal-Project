@@ -12,7 +12,8 @@
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/userimage" />
+        android:background="@drawable/user_profice_image_border"
+        android:src="@drawable/userimage"/>
 
     <TextView
         android:id="@+id/username"
