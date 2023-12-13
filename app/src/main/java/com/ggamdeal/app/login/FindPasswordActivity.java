@@ -18,7 +18,6 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 public class FindPasswordActivity extends AppCompatActivity {
-    private String TAG = "FirebaseInfo";
     private FirebaseAuth mAuth;
     EditText emailInput;
     Button sendMailButton;
@@ -35,20 +34,15 @@ public class FindPasswordActivity extends AppCompatActivity {
         sendMailButton.setOnClickListener(v -> {
             String email = emailInput.getText().toString();
             if (!email.isEmpty()) {
-                mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        List<String> signInMethods = task.getResult().getSignInMethods();
-                        if (signInMethods != null && !signInMethods.isEmpty()) {
-                            // 이메일이 존재하는 경우, 비밀번호 재설정 이메일 전송
-                            sendPasswordResetEmail(email);
-                        } else {
-                            Toast.makeText(this, "해당 이메일은 등록되지 않은 이메일입니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // 에러 처리
-                        Toast.makeText(this, "이메일 확인 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                mAuth.sendPasswordResetEmail(email)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(this, "비밀번호 재설정 이메일이 전송되었습니다.", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                showAlertDialog("비밀번호 재설정 이메일 전송을 실패하였습니다.\n이메일을 확인해주세요.");
+                            }
+                        });
             } else {
                 showAlertDialog("이메일을 입력하세요");
             }

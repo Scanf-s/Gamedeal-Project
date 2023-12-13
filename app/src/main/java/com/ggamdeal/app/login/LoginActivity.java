@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -52,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         emailLoginButton.setOnClickListener(v -> {
             String email = emailInputField.getText().toString();
             String password = passwordInputField.getText().toString();
-            if(!email.isEmpty() && !password.isEmpty()) {
+            if(!email.isEmpty() && !password.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 emailLogin(email, password);
             }
             else{
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         emailSignUpButton.setOnClickListener(v -> {
             String email = emailInputField.getText().toString();
             String password = passwordInputField.getText().toString();
-            if(!email.isEmpty() && !password.isEmpty()) {
+            if(!email.isEmpty() && !password.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 emailSignUp(email, password);
             }
             else{

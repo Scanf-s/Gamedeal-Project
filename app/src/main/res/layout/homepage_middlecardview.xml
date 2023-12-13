@@ -11,7 +11,7 @@
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
 
@@ -34,7 +34,7 @@
             android:layout_toEndOf="@+id/card_image"
             android:ellipsize="none"
             android:fontFamily="@font/nanumsquareroundeb"
-            android:maxLines="2"
+            android:maxLines="1"
             android:text="TitleView"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -73,6 +73,16 @@
             android:fontFamily="@font/nanumsquareroundb"
             android:text="DiscountRate 할인"
             android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/card_add_to_wishlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="0dp"
+            android:src="@drawable/ic_add" />
 
     </RelativeLayout>
 

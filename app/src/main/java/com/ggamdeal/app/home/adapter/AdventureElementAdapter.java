@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -71,7 +72,7 @@ public class AdventureElementAdapter extends RecyclerView.Adapter<AdventureEleme
         TextView discountRateView;
         TextView originalPriceView;
         TextView discountPriceView;
-
+        ImageView addToWishlist;
         private String gameUrl;
 
         public ViewHolder(@NonNull View itemView) {
@@ -81,6 +82,10 @@ public class AdventureElementAdapter extends RecyclerView.Adapter<AdventureEleme
             originalPriceView = itemView.findViewById(R.id.card_original_price);
             discountPriceView = itemView.findViewById(R.id.card_discount_price);
             discountRateView = itemView.findViewById(R.id.card_discount_rate);
+            addToWishlist = itemView.findViewById(R.id.card_add_to_wishlist);
+            addToWishlist.setOnClickListener(v -> {
+                Toast.makeText(v.getContext(), "위시리스트에 추가하였습니다.", Toast.LENGTH_SHORT).show();
+            });
             itemView.setOnClickListener(this);
         }
 

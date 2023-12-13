@@ -32,7 +32,7 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
 
     public TopElementAdapter(Fragment fragment) {
         this.fragment = fragment;
-        getActionDataFromFirestore();
+        getEventDataFromFirestore();
     }
 
     @NonNull
@@ -84,14 +84,14 @@ public class TopElementAdapter extends RecyclerView.Adapter<TopElementAdapter.Vi
         }
     }
 
-    private void getActionDataFromFirestore() {
+    private void getEventDataFromFirestore() {
         CollectionReference colref = db.collection("steam");
         colref.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String imageUrl = document.getString("img");
-                        String gameLink = document.getString("gameLink");
+                        String gameLink = document.getString("link");
                         String titleInfo = document.getString("title");
                         GameInfo gameInfo = new GameInfo(imageUrl, gameLink, titleInfo);
                         gameInfoList.add(gameInfo);
