@@ -10,9 +10,10 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        androidx.core.splashscreen.SplashScreen.installSplashScreen(this); // native splash screen which will be skipped
+        androidx.core.splashscreen.SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        //로딩페이지 Splash
         new Handler().postDelayed(() -> {
             Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
             SplashActivity.this.startActivity(mainIntent);

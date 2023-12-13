@@ -27,15 +27,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class HomeActivity extends AppCompatActivity implements ProfileUpdateListener{
+public class HomeActivity extends AppCompatActivity{
     private static final int BACK_PRESS_INTERVAL = 2000;
     private long backPressedTime;
-    BottomNavigationView navigationBarView;
-    DrawerLayout drawerLayout;
-    ActionBarDrawerToggle toggle;
-    NavigationView navigationView;
-    FirebaseUser currentUser;
-    Toolbar toolbar;
+    private BottomNavigationView navigationBarView;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
+    private FirebaseUser currentUser;
+    private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,12 +138,6 @@ public class HomeActivity extends AppCompatActivity implements ProfileUpdateList
             finish();
         }
         else Log.d("Firebase", "signOut:failure");
-    }
-
-    //프로필 사진 변경 시 호출되는 메서드
-    @Override
-    public void onProfileUpdated() {
-        updateNavHeader(currentUser);
     }
 
     private void updateNavHeader(FirebaseUser user) {

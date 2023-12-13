@@ -2,10 +2,12 @@ package com.ggamdeal.app.home;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ggamdeal.app.R;
@@ -26,6 +29,7 @@ import com.ggamdeal.app.home.adapter.IndieElementAdapter;
 import com.ggamdeal.app.home.adapter.PuzzleElementAdapter;
 import com.ggamdeal.app.home.adapter.SimulationElementAdapter;
 import com.ggamdeal.app.home.adapter.TopElementAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -40,6 +44,8 @@ public class HomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private NestedScrollView nestedScrollView;
+    private FloatingActionButton fabScrollTop;
     private TopElementAdapter topAdapter;
     private ActionElementAdapter actionAdapter;
     private AdventureElementAdapter adventureAdapter;
@@ -59,14 +65,14 @@ public class HomeFragment extends Fragment {
     private RecyclerView simulationRecyclerView;
 
     private Handler handler = new Handler();
-    CircleIndicator3 indicator;
-    TextView showMore1;
-    TextView showMore2;
-    TextView showMore3;
-    TextView showMore4;
-    TextView showMore5;
-    TextView showMore6;
-    TextView showMore7;
+    private CircleIndicator3 indicator;
+    private TextView showMore1;
+    private TextView showMore2;
+    private TextView showMore3;
+    private TextView showMore4;
+    private TextView showMore5;
+    private TextView showMore6;
+    private TextView showMore7;
 
     public HomeFragment() {}
 
@@ -107,12 +113,20 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        nestedScrollView = view.findViewById(R.id.nestedScrollView);
+
+        //FloatingActionButton 설정
+        fabScrollTop = view.findViewById(R.id.fabScrollTop);
+        fabScrollTop.setOnClickListener(view1 -> {
+            ObjectAnimator.ofInt(nestedScrollView, "scrollY", 0).setDuration(500).start();
+        });
 
         // ViewPager 설정
         homeTopViewPager = view.findViewById(R.id.homeTopViewPager);
         topAdapter = new TopElementAdapter(this);
         homeTopViewPager.setAdapter(topAdapter);
 
+        // RecyclerView 설정
         actionRecyclerView = view.findViewById(R.id.homeMiddleRecyclerView);
         actionAdapter = new ActionElementAdapter(this);
         actionRecyclerView.setAdapter(actionAdapter);

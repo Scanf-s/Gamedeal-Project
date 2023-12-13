@@ -33,20 +33,11 @@ import java.util.UUID;
 public class BottomSheetFragment extends BottomSheetDialogFragment {
 
     int REQUEST_CODE_PICK_IMAGE = 1;
-    private ProfileUpdateListener updateListener;
     ImageView profileImage;
     FirebaseUser currentUser;
     Button changeProfileButton;
     TextView emailView;
     TextView changePasswordButton;
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof ProfileUpdateListener) {
-            updateListener = (ProfileUpdateListener) context;
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

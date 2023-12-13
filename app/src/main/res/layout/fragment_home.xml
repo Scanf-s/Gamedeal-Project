@@ -105,9 +105,9 @@
                 android:id="@+id/HomeMiddleMainTitleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:background="@color/light_blue"
                 android:fontFamily="@font/nanumsquareroundeb"
-                android:layout_marginTop="20dp"
                 android:paddingLeft="30dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
@@ -411,7 +411,20 @@
                 app:layout_constraintTop_toBottomOf="@id/homeMiddleTextTitle7" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabScrollTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/fab_design"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/white"
+        app:borderWidth="0dp"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_double_uparrow" />
 
 </FrameLayout>
