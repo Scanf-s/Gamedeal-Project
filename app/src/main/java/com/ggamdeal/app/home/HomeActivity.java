@@ -141,6 +141,9 @@ public class HomeActivity extends AppCompatActivity{
     }
 
     private void updateNavHeader(FirebaseUser user) {
+        if (isDestroyed()) {
+            return;
+        }
         View headerView = navigationView.getHeaderView(0);
         TextView userName = headerView.findViewById(R.id.username);
         ImageView userProfileImage = headerView.findViewById(R.id.iv_image);

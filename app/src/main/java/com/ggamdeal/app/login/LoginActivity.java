@@ -99,13 +99,11 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "createUserWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-
-                        updateUI(user);
+                        showAlertDialog("회원가입에 성공하였습니다.");
                     } else {
                         Log.d(TAG, "createUserWithEmail:failure");
                         Toast.makeText(getApplicationContext(), "서버 오류로 인해 회원가입을 실패하였습니다. 잠시 후 다시 시도해주세요",
                                 Toast.LENGTH_SHORT).show();
-                        updateUI(null);
                     }
                 });
     }
@@ -129,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             Intent intent = new Intent(this, HomeActivity.class);
-            intent.putExtra("USER_PROFILE", "email: " + user.getEmail() + "\n" + "uid: " + user.getUid());
             startActivity(intent);
         }
     }
