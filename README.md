@@ -1,1 +1,3 @@
-https://youtu.be/Br6Z83v5dBo
+팀프로젝트(이었던) 1인개발 어플리케이션 입니다.
+Java를 사용한 안드로이드 어플리케이션
+소개영상 : https://youtu.be/Br6Z83v5dBo
